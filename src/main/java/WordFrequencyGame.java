@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
 
@@ -25,12 +25,9 @@ public class WordFrequencyGame {
     }
 
     private static String composeOutPut(List<Input> wordFrequencies) {
-        StringJoiner joiner = new StringJoiner("\n");
-        for (Input w : wordFrequencies) {
-            String s = w.value() + " " + w.count();
-            joiner.add(s);
-        }
-        return joiner.toString();
+        return wordFrequencies.stream()
+                .map(w -> w.value() + " " + w.count())
+                .collect(Collectors.joining("\n"));
     }
 
     private List<Input> countWordFrequency(String[] words) {
