@@ -17,16 +17,20 @@ public class WordFrequencyGame {
                 String[] words = inputStr.split(ANY_SPACE);
                 List<Input> wordFrequencies = countWordFrequency(words);
                 wordFrequencies.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
-                StringJoiner joiner = new StringJoiner("\n");
-                for (Input w : wordFrequencies) {
-                    String s = w.getValue() + " " + w.getWordCount();
-                    joiner.add(s);
-                }
-                return joiner.toString();
+                return composeOutPut(wordFrequencies);
             } catch (Exception e) {
                 return "Calculate Error";
             }
         }
+    }
+
+    private static String composeOutPut(List<Input> wordFrequencies) {
+        StringJoiner output = new StringJoiner("\n");
+        for (Input w : wordFrequencies) {
+            String s = w.getValue() + " " + w.getWordCount();
+            output.add(s);
+        }
+        return output.toString();
     }
 
     private List<Input> countWordFrequency(String[] words) {
